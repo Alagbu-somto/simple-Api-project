@@ -1,6 +1,6 @@
 import axios from "axios";
 
-// ----------------assigning details for the starship-------
+// ----------------assigning details for the starship-----------
 export const fetchApi = async () => {
   const endPoint = "https://swapi.dev/api/starships/9/";
   const data = await axios.get(endPoint).then((res) => {

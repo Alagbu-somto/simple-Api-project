@@ -19,7 +19,7 @@ app.get("/information", async (req: Request, res: Response) => {
     crew: data.crew,
     isleiaOnPlanet: Ans.isleiaOnPlanet,
   };
-  return res.json({ status: true, ourResponse });
+  return res.send(ourResponse);
 });
 
 app.listen(5000, () => {
