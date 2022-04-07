@@ -9,17 +9,24 @@ app.use(express.json());
 app.get("/information", async (req: Request, res: Response) => {
   const data = await fetchApi();
   const Ans = await isTrue();
-  interface Response {
-    startship: {};
+
+  class theResponse {
+    starship: {};
     crew: string;
     isleiaOnPlanet: boolean;
+    constructor(starship: {}, crew: string, isleiaOnPlanet: boolean) {
+      this.starship = starship;
+      this.crew = crew;
+      this.isleiaOnPlanet = isleiaOnPlanet;
+    }
   }
-  const ourResponse: Response = {
-    startship: data.starship,
-    crew: data.crew,
-    isleiaOnPlanet: Ans.isleiaOnPlanet,
-  };
-  return res.send(ourResponse);
+  const Response = new theResponse(
+    data.starship,
+    data.crew,
+    Ans.isleiaOnPlanet
+  );
+
+  return res.send(Response);
 });
 
 app.listen(5000, () => {

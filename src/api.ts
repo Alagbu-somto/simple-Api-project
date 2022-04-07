@@ -8,7 +8,11 @@ export const fetchApi = async () => {
     const Class: string = res.data.starship_class;
     const model: string = res.data.model;
     const crew: string = res.data.crew;
-    const starship: { starship: {}; crew: string } = {
+    interface Starship {
+      starship: {};
+      crew: string;
+    }
+    const starship: Starship = {
       starship: { name, class: Class, model },
       crew,
     };
