@@ -1,5 +1,5 @@
 import express, { Request, Response } from "express";
-import { fetchApi, isTrue } from "./api";
+import { fetchApi, isTrue, theStarship } from "./api";
 const cors = require("cors");
 
 const app = express();
@@ -7,8 +7,9 @@ app.use(cors());
 app.use(express.json());
 
 app.get("/information", async (req: Request, res: Response) => {
-  const data = await fetchApi();
+  const Crew = await fetchApi();
   const Ans = await isTrue();
+  const Starship = await theStarship();
 
   class theResponse {
     starship: {};
@@ -20,11 +21,7 @@ app.get("/information", async (req: Request, res: Response) => {
       this.isleiaOnPlanet = isleiaOnPlanet;
     }
   }
-  const Response = new theResponse(
-    data.starship,
-    data.crew,
-    Ans.isleiaOnPlanet
-  );
+  const Response = new theResponse(Starship.starship, Crew, Ans.isleiaOnPlanet);
 
   return res.send(Response);
 });

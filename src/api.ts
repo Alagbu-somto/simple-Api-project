@@ -1,50 +1,97 @@
 import axios from "axios";
 
-// ----------------assigning details for the starship-----------
-export const fetchApi = async () => {
-  const endPoint = "https://swapi.dev/api/starships/9/";
+// ------------finding starship-------------
+
+const Starship = async () => {
+  const endPoint: string = "https://swapi.dev/api/people/";
   const data = await axios.get(endPoint).then((res) => {
-    const name: string = res.data.name;
-    const Class: string = res.data.starship_class;
-    const model: string = res.data.model;
-    const crew: number = res.data.crew;
-    interface Starship {
-      starship: {};
-      crew: number;
-    }
-    const starship: Starship = {
-      starship: { name, class: Class, model },
-      crew,
-    };
-    return starship;
+    const Array: [] = res.data.results;
+    let startshipUrl: { starship: string } = { starship: "" };
+    Array.forEach((item: { name: string; starships: [0]; url: string }) => {
+      const name: string = "Darth Vader";
+      if (item.name === name) {
+        console.log("found name match");
+        console.log(item.name);
+        console.log(item.url);
+        startshipUrl.starship = `${item.starships[0]}`;
+      }
+    });
+    return startshipUrl;
   });
+
   return data;
 };
 
-// ------------finding out people resident on planet Alderaan-------------
-const Api = async () => {
-  const endPoint = "https://swapi.dev/api/planets/";
+// ------------pulling out the datails of the starship-------------
+
+export const theStarship = async () => {
+  const foundStarship: { starship: string } = await Starship();
+  const endPoint: string = foundStarship.starship;
   const data = await axios.get(endPoint).then((res) => {
-    const Array = res.data.results;
-    Array.forEach((item: { name: string; residents: [0]; url: string }) => {
-      const planet: string = "Alderaan";
-      if (item.name === planet) {
-        console.log("found name match");
-        // console.log(item.name);
-        // console.log(item.residents);
-        // console.log(item.url);
-      }
-      const ans = item.residents[0];
-      return ans;
-    });
+    const nameOfStarship: string = res.data.name;
+    const model: string = res.data.model;
+    const Class: string = res.data.starship_class;
+    interface Starship {
+      starship: {
+        name: string;
+        class: string;
+        model: string;
+      };
+    }
+    const starship: Starship = {
+      starship: {
+        name: nameOfStarship,
+        class: Class,
+        model,
+      },
+    };
+    return starship;
+  });
+
+  return data;
+};
+
+// ----------------pulling out the details of the crew -----------
+
+export const fetchApi = async () => {
+  const endPoint: string = "https://swapi.dev/api/starships/9/";
+  const data: number = await axios.get(endPoint).then((res) => {
+    const crew: number = res.data.crew;
+
+    const crewMembers: number = crew;
+    return crewMembers;
   });
   console.log(data);
 
   return data;
 };
-// -----------assinging boolean if princess Liea was one the residents-------------
+
+// ------------finding out people resident on planet Alderaan-------------
+
+const Api = async () => {
+  const endPoint: string = "https://swapi.dev/api/planets/";
+  const data = await axios.get(endPoint).then((res) => {
+    const Array: [] = res.data.results;
+    let thePrincess = { princess: "" };
+    Array.forEach((item: { name: string; residents: [0]; url: string }) => {
+      const planet: string = "Alderaan";
+      if (item.name === planet) {
+        const ans = item.residents[0];
+        thePrincess.princess = `${ans}`;
+        return ans;
+      }
+    });
+    return thePrincess;
+  });
+
+  return data;
+};
+
+// -----------assinging boolean if princess Liea was in Alderaan-------------
+
 export const isTrue = async () => {
-  const endPoint: string = "https://swapi.dev/api/people/5/";
+  const foundPrincess = await Api();
+  const endPoint: string = foundPrincess.princess;
   const data = await axios.get(endPoint).then((res) => {
     const person: string = res.data.name;
     if (person === person) {
