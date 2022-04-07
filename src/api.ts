@@ -7,10 +7,10 @@ export const fetchApi = async () => {
     const name: string = res.data.name;
     const Class: string = res.data.starship_class;
     const model: string = res.data.model;
-    const crew: string = res.data.crew;
+    const crew: number = res.data.crew;
     interface Starship {
       starship: {};
-      crew: string;
+      crew: number;
     }
     const starship: Starship = {
       starship: { name, class: Class, model },

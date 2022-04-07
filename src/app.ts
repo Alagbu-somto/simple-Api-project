@@ -12,9 +12,9 @@ app.get("/information", async (req: Request, res: Response) => {
 
   class theResponse {
     starship: {};
-    crew: string;
+    crew: number;
     isleiaOnPlanet: boolean;
-    constructor(starship: {}, crew: string, isleiaOnPlanet: boolean) {
+    constructor(starship: {}, crew: number, isleiaOnPlanet: boolean) {
       this.starship = starship;
       this.crew = crew;
       this.isleiaOnPlanet = isleiaOnPlanet;
