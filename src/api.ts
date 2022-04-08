@@ -94,7 +94,8 @@ export const isTrue = async () => {
   const endPoint: string = foundPrincess.princess;
   const data = await axios.get(endPoint).then((res) => {
     const person: string = res.data.name;
-    if (person === person) {
+    const princess: string = "Leia Organa";
+    if (person === princess) {
       const Ans: boolean = true;
       const Answer: { isleiaOnPlanet: boolean } = {
         isleiaOnPlanet: Ans,
