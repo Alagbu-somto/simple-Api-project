@@ -50,22 +50,20 @@ class Starship {
   // ----------------Pulling out the details of the starship crew -----------
 
   async Crew(endPoint: string, starship: string) {
-    const data: string = await axios.get(endPoint).then((res) => {
+    const data: number = await axios.get(endPoint).then((res) => {
       const Array: [] = res.data.results;
-      let crew: string = "";
+      let crewNum: number = 0;
       Array.forEach((item: { name: string; crew: string }) => {
         const starshipName = starship;
         if (item.name === starshipName) {
-          console.log(item.name);
-          console.log(item.crew);
-          crew = item.crew;
+          const crew = item.crew;
+          crewNum = Number(crew.replace(/,/g, ""));
         }
 
-        return item.crew;
+        return crewNum;
       });
-      return crew;
+      return crewNum;
     });
-    console.log(data);
     return data;
   }
 
@@ -89,21 +87,21 @@ class Starship {
     return data;
   }
 
-  // -----------Assinging boolean if princess Liea was in Alderaan-------------
+  // -----------Assinging boolean value if princess Liea was in Alderaan-------------
 
   async foundResident(endPoint: string, person: string) {
     const data = await axios.get(endPoint).then((res) => {
       const person: string = res.data.name;
       const foundPerson: string = person;
       if (person === foundPerson) {
-        const Ans: string = "true";
-        const Answer: { isleiaOnPlanet: string } = {
+        const Ans: boolean = true;
+        const Answer: { isleiaOnPlanet: boolean } = {
           isleiaOnPlanet: Ans,
         };
         return Answer.isleiaOnPlanet;
       } else {
-        const Ans: string = "false";
-        const Answer: { isleiaOnPlanet: string } = {
+        const Ans: boolean = false;
+        const Answer: { isleiaOnPlanet: boolean } = {
           isleiaOnPlanet: Ans,
         };
         return Answer.isleiaOnPlanet;

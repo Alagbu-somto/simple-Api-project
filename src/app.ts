@@ -12,19 +12,18 @@ app.get("/information", async (req: Request, res: Response) => {
   const endPoint1: string = "https://swapi.dev/api/people/";
   const person: string = "Darth Vader";
 
-  // ------------Details Of The Starship-------------
+  // ------------Getting details Of The Starship-------------
 
   const starshipUrl: string = await details.starshipUrl(endPoint1, person);
   const starship: {} = await details.Starship(starshipUrl);
 
-  // ----------------Details Of The Starship Crew -----------
+  // ----------------Getting details Of The Starship Crew -----------
 
   const endPoint2: string = "https://swapi.dev/api/starships/";
   const starshipName: string = "Death Star";
-  const crew = await details.Crew(endPoint2, starshipName);
-  const check = parseFloat(crew);
+  const crew: number = await details.Crew(endPoint2, starshipName);
 
-  // ----------------Residents Present -----------
+  // ----------------Residents Present on planet-----------
 
   const endPoint3: string = "https://swapi.dev/api/planets/";
   const planet: string = "Alderaan";
@@ -33,16 +32,16 @@ app.get("/information", async (req: Request, res: Response) => {
 
   const resident: string = "Leia Organa";
   const princessUrl: string = await details.princessUrl(endPoint3, planet);
-  const foundPrincess: string = await details.foundResident(
+  const foundPrincess: boolean = await details.foundResident(
     princessUrl,
     resident
   );
 
   class theResponse {
     starship: {};
-    crew: string;
-    isleiaOnPlanet: string;
-    constructor(starship: {}, crew: string, isleiaOnPlanet: string) {
+    crew: number;
+    isleiaOnPlanet: boolean;
+    constructor(starship: {}, crew: number, isleiaOnPlanet: boolean) {
       this.starship = starship;
       this.crew = crew;
       this.isleiaOnPlanet = isleiaOnPlanet;
